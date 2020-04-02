@@ -22,6 +22,11 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+  <!-- CodeMirror -->
+  <script src="app/codemirror-5.52.2/lib/codemirror.js"></script>
+  <link rel="stylesheet" href="app/codemirror-5.52.2/lib/codemirror.css">
+  <script src="app/codemirror-5.52.2/mode/javascript/javascript.js"></script>
+
 </head>
 
 <body id="page-top">
@@ -325,20 +330,56 @@
 
         </nav>
         <!-- End of Topbar -->
-
+        <!-- ################################################################################# -->
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
+          <!-- Page Heading 
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+          </div> -->
+
+
+          <!-- Approach -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">Editor</h6>
+              
+              <div class="dropdown no-arrow">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                  <div class="dropdown-header">Dropdown Header:</div>
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body">
+              <textarea id="demotext"></textarea>
+              <!-- Create a simple CodeMirror instance -->
+              <script>
+                var txArea = document.getElementById("demotext");
+                var editor = CodeMirror.fromTextArea(txArea, {
+                  lineNumbers: true,
+                  mode: "text/html",
+                  matchBrackets: true
+                });
+              </script>
+
+            </div>
           </div>
 
-          <!-- Content Row -->
-          <div class="row">
+          
+          <!-- Content Row 
+          <div class="row">-->
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Earnings (Monthly) Card Example 
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
@@ -353,9 +394,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Earnings (Monthly) Card Example 
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
@@ -370,9 +411,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Earnings (Monthly) Card Example 
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -396,9 +437,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
 
-            <!-- Pending Requests Card Example -->
+            <!-- Pending Requests Card Example 
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
@@ -414,7 +455,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!-- Content Row -->
 
