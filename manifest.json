@@ -5,8 +5,8 @@
     "background_color": "#1d1d1d",
     "display": "standalone",
     "orientation": "portrait",
-    "scope": "/",
-    "start_url": "/",
+    "scope": "/fupmobile",
+    "start_url": "/fupmobile/",
     "icons": [
         {
           "src": "app/icons/icon-72x72.png",
