@@ -18,6 +18,10 @@
     color: #ff4400!important;
 }
 
+a.text-primary:focus, a.text-primary:hover {
+    color: #ff4500!important;
+}
+
 .bg-primary {
     background-color: #ff4400!important;
 }

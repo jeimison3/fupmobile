@@ -33,6 +33,7 @@
   <script src="app/codemirror-5.52.2/addon/hint/show-hint.js"></script>
   <script src="app/codemirror-5.52.2/addon/hint/javascript-hint.js"></script>
 
+  <script src="app/app.js"></script>
 </head>
 
 <body id="page-top">
@@ -194,7 +195,7 @@
 
             <!-- Nav Item - Botão de iniciar -->
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link" href="#" id="runButton" role="button" aria-expanded="false"
+              <a alt="F9" class="nav-link" href="#" onclick="btnRun(); return false;" id="runButton" role="button" aria-expanded="false"
                 style="border-left: .25rem solid #1cc88a!important; margin-top: 21px; block-size: 26px; padding: 3px;">
                 <i class="fas fa-play-circle fa-fw text-green"></i>Run 
                 
@@ -274,15 +275,18 @@
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-exclamation-circle fa-fw"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">2</span>
+                <span id="errorsCounter" class="badge badge-danger badge-counter">0</span>
               </a>
               <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                   Alertas e avisos
                 </h6>
+                <div id="areaNotificacoes">
 
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                </div>
+
+                <!--<a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
                     <div class="icon-circle bg-warning">
                       <i class="fas fa-exclamation-triangle text-white"></i>
@@ -292,21 +296,10 @@
                     <div class="small text-gray-500">Line 49</div>
                     Warn: Este é apenas um exemplo de warning
                   </div>
-                </a>
+                </a>-->
 
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-danger">
-                      <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">Line 49</div>
-                    Error: Este é um exemplo de erro!
-                  </div>
-                </a>
 
-                <a class="dropdown-item text-center small text-gray-800" href="#">Limpar</a>
+                <a class="dropdown-item text-center small text-gray-800" onclick="warnsAndErrosWindow_Clear(); return false;" href="#">Limpar</a>
               </div>
             </li>
 
@@ -360,7 +353,7 @@
 
 
           <!-- Approach -->
-          <div class="card shadow mb-4 card-fullscreen">
+          <div id="editorSect" class="card shadow mb-4 card-fullscreen">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 class="m-0 font-weight-bold text-primary">Editor</h6>
               
@@ -379,42 +372,17 @@
 
             </div>
             <div class="card-body bg-codeeditor">
-              <textarea id="demotext"></textarea>
-              <!-- Create a simple CodeMirror instance -->
-              <script>
-                var txArea = document.getElementById("demotext");
-                var editor = CodeMirror.fromTextArea(txArea, {
-                  lineNumbers: true,
-                  mode: {name: "javascript", globalVars: true},
-                  extraKeys: {"Ctrl-Space": "autocomplete"},
-                  autoCloseBrackets: true,
-                  matchBrackets: true,
-                  showCursorWhenSelecting: true,
-                  theme: "dracula",
-                  tabSize: 2
-                });
-              </script>
-
+              <textarea id="demotext">console.log(123);</textarea>
             </div>
           </div>
 
 
-          <div class="card shadow mb-4">
+          <div id="saidaSect" class="card shadow mb-4">
             <div class="card-header py-3">
               <h6 class="m-0 font-weight-bold text-primary">Saída</h6>
             </div>
             <div class="card-body">
               <textarea id="outputText"></textarea>
-              <!-- Create a simple CodeMirror instance -->
-              <script>
-                var txArea = document.getElementById("outputText");
-                var editor = CodeMirror.fromTextArea(txArea, {
-                  lineNumbers: true,
-                  mode: "javascript",
-                  tabSize: 1
-                });
-              </script>
-
             </div>
           </div>
 
@@ -606,6 +574,38 @@
   <!-- Page level custom scripts -->
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
+
+
+  <script src="app/jshint.js"></script>
+  <script src="app/editor.js"></script>
+
+  <script>
+    var txArea = document.getElementById("demotext");
+    var editorCodigo = CodeMirror.fromTextArea(txArea, {
+      lineNumbers: true,
+      mode: {name: "javascript", globalVars: true},
+      extraKeys: {
+        "Ctrl-Space": "autocomplete",
+        "F9": btnRun,
+        "Ctrl-S":saveCode,
+      },
+      autoCloseBrackets: true,
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      theme: "dracula",
+      tabSize: 2
+    });
+
+    editorCodigo.on( 'change', EditorCodigo_onChange );
+    
+    txArea = document.getElementById("outputText");
+    var editorSaida = CodeMirror.fromTextArea(txArea, {
+      readOnly: true,
+      lineNumbers: true,
+      mode: "javascript",
+      tabSize: 1
+    });
+  </script>
 
 </body>
 
