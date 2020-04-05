@@ -35,14 +35,14 @@ self.addEventListener('install', function(event) {
           'app/jshint.js',
           'app/editor.js',
           'app/app.js',
-          'app/icons/icon-72x72.png',
-          'app/icons/icon-96x96.png',
-          'app/icons/icon-128x128.png',
-          'app/icons/icon-144x144.png',
-          'app/icons/icon-152x152.png',
-          'app/icons/icon-192x192.png',
-          'app/icons/icon-384x384.png',
-          'app/icons/icon-512x512.png'
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-72x72.png',
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-96x96.png',
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-128x128.png',
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-144x144.png',
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-152x152.png',
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-192x192.png',
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-384x384.png',
+          'https://raw.githubusercontent.com/jeimison3/fupmobile/master/app/icons/icon-512x512.png'
         ]);
       })
     );

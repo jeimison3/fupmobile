@@ -123,7 +123,7 @@ function appTutorial_sequence(seqNum){
             okVisivel:false,
             addClasse: true
         },{
-            txt: 'Por fim, chamamos de "app" pois você já pode acessar sem internet! Que tal tentar?<br/>Pra uma boa experiência, adicione em seu navegador por:<br/>'+
+            txt: 'Por fim, chamamos de app pois você logo poderá acessar sem internet.<br/>Pra uma boa experiência, adicione em seu navegador por:<br/>'+
             (isMobile ? 
                 '<div style="-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-o-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg); position: fixed;">&#8230;</div> &emsp; > Adicionar à tela inicial'
                 : 'Configurações > Instalar aplicativo'),
