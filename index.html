@@ -89,7 +89,7 @@
 
       <!-- Nav Item - Pages Modal Config -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#exemplosListaModal" aria-expanded="true">
+        <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#exemplosModal" aria-expanded="true">
           <i class="fas fa-fw fa-file-code"></i>
           <span>Exemplos</span>
         </a>
@@ -127,9 +127,10 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Sobre</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="modal" data-target="#sobreModal" aria-expanded="true">
+          <i class="fas fa-fw fa-info"></i>
+          <span>Sobre</span>
+        </a>
       </li>
 
       <!-- Divider -->
@@ -539,6 +540,24 @@
     </div>
   </div>
 
+  <!-- Exemplos Modal-->
+  <div class="modal fade" id="exemplosModal" tabindex="-1" role="dialog" aria-labelledby="exemplosModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exemplosModalLabel">Exemplos</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Funcionalidade em desenvolvimento.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Configurações Modal-->
   <div class="modal fade" id="configuracoesModal" tabindex="-1" role="dialog" aria-labelledby="configuracoesModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -550,6 +569,27 @@
           </button>
         </div>
         <div class="modal-body">Funcionalidade em desenvolvimento.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sobre Modal-->
+  <div class="modal fade" id="sobreModal" tabindex="-1" role="dialog" aria-labelledby="sobreModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sobreModalLabel">Sobre</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Plataforma desenvolvida por <a href="http://jeimison.eu5.net/">Jeimison Moreno</a>.</p>
+          <p>Link do repositório: <a href='https://github.com/jeimison3/fupmobile' target="_blank">https://github.com/jeimison3/fupmobile</a></p>
+        </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button>
         </div>
