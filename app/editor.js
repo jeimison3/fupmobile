@@ -83,7 +83,7 @@ function precompileErrorHandling(arrErrors){
 }
 
 function precompileNewErrorHandle(erro){
-    console.log("Linha "+ erro.line + ". " + erro.reason + " (No trecho: " + erro.evidence + ")" );
+    //console.log("Linha "+ erro.line + ". " + erro.reason + " (No trecho: " + erro.evidence + ")" );
     warnsAndErrosWindow_Add( 'error', erro.line, erro.reason );
 }
 

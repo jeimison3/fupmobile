@@ -1,4 +1,4 @@
-var currVersion = '05_04_2020__07_00_00'
+var currVersion = '05_04_2020__07_06_00'
 
 // Responde a mensagem de atualização de SW
 self.addEventListener("message", function(event) {
@@ -13,6 +13,7 @@ self.addEventListener('install', function(event) {
         return cache.addAll([
           './',
           'index.html',
+          'favicon.ico',
           'manifest.json',
           'sw.js',
           'swreg.js',
