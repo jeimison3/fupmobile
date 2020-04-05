@@ -1,6 +1,10 @@
 # FUPMobile
 Um PWA(Progressive Web App) que requer apenas um servidor HTTP para distribuir uma plataforma de desenvolvimento em JavaScript.
 
+## Bibliotecas
+- [JSHint](https://jshint.com) - Checa erros e avisos do código.
+
+
 ## Template Bootstrap
 - [Start Bootstrap - SB Admin 2](https://startbootstrap.com/template-overviews/sb-admin-2/)
 
