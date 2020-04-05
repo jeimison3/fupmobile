@@ -1,12 +1,14 @@
 {
     "name": "FUPMobile",
     "short_name": "FUPMobile",
+    "description": "Plataforma para programação simplificada em JS.",
     "theme_color": "#ff4500",
-    "background_color": "#1d1d1d",
+    "background_color": "#f8f9fc",
     "display": "standalone",
-    "orientation": "portrait",
     "scope": "/fupmobile",
     "start_url": "/fupmobile/",
+    "lang": "pt-BR",
+    "categories": ["education", "lifestyle"],
     "icons": [
         {
           "src": "app/icons/icon-72x72.png",

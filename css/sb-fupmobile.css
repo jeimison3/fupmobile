@@ -26,6 +26,14 @@ a.text-primary:focus, a.text-primary:hover {
     background-color: #ff4400!important;
 }
 
+.btn-link:hover {
+    color: #ff4400 !important;
+}
+
+.btn-link {
+    color: #ff9067 !important;
+}
+
 .bg-codeeditor{
     background-color: #282a36;
     height: 550px;
@@ -45,3 +53,81 @@ a.text-primary:focus, a.text-primary:hover {
 .card-fullscreen{
     margin: -25px -25px 25px -25px !important;
 }
+
+
+@keyframes reduceTransparence {
+    /*
+    0%  {background-color: rgba(255, 68, 0, 0.767);}
+    50% {background-color: rgba(255, 68, 0, 0.421);}
+    100% {background-color: rgba(255, 68, 0, 0.767);}
+    */
+    0%  {background-color: rgba(0, 0, 0, 0.767);}
+    100% {background-color: rgba(0, 0, 0, 0.421);}
+  }
+
+
+.firstRun{
+    z-index: 11;
+    background-color: rgb(255, 255, 255);
+}
+
+/*Anim*/
+.container-pulser {
+    content: '';
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 50%;
+    position: absolute;
+    opacity: 0;
+    animation: pulsate infinite 1.5s;
+    animation-delay: 500ms;
+  }
+
+  .pointer-view{
+    content: '';
+    background-color: red;
+    border: 2px solid rgb(0, 255, 0);
+    border-radius: 50%;
+    position: absolute;
+    opacity: 1;
+  }
+
+  .click-to-pass{
+    content: '';
+    background-color: red;
+    border: 2px solid rgb(255, 255, 255);
+    position: absolute;
+    opacity: 0;
+  }
+  
+  @keyframes pulsate {
+        0% {
+            transform: scale(1, 1);
+            -webkit-transform: scale(1, 1);
+            -moz-transform: scale(1, 1);
+            opacity: 1;
+        }
+        70% {
+            opacity: 0.01;
+        }
+        100% {
+            transform: scale(40, 40);
+            -webkit-transform: scale(40, 40);
+            -moz-transform: scale(40, 40);
+            opacity: 0;
+        }
+    }
+
+    @keyframes pulsate-xplode {
+        0% {
+            transform: scale(0.5, 0.5);
+            -webkit-transform: scale(0.5, 0.5);
+            -moz-transform: scale(0.5, 0.5);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(6.4, 6.4);
+            -webkit-transform: scale(6.4, 6.4);
+            -moz-transform: scale(6.4, 6.4);
+            opacity: 0;
+        }
+    }

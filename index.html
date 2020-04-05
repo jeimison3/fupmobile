@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
 
@@ -11,7 +11,6 @@
 
   <meta name="application-name" content="FUPMobile">
   <link href="manifest.json" rel="manifest">
-  <script src="app/app.js"></script>
 
   <title>FUPMobile</title>
 
@@ -33,7 +32,7 @@
   <script src="app/codemirror-5.52.2/addon/hint/show-hint.js"></script>
   <script src="app/codemirror-5.52.2/addon/hint/javascript-hint.js"></script>
 
-  <script src="app/app.js"></script>
+  
 </head>
 
 <body id="page-top">
@@ -42,7 +41,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -154,9 +153,12 @@
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+          
+          <button id="sidebarToggleTop" class="pulse btn btn-link d-md-none rounded-circle mr-3">
+            
             <i class="fa fa-bars"></i>
           </button>
+          
 
           <!-- Topbar campo de texto -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -529,7 +531,7 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Funcionalidade em desenvolvimento.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button>
         </div>
@@ -547,7 +549,7 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">Funcionalidade em desenvolvimento.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button>
         </div>
@@ -571,6 +573,7 @@
 
   <script src="app/jshint.js"></script>
   <script src="app/editor.js"></script>
+  <script src="app/app.js"></script>
 
   <script>
     var txArea = document.getElementById("demotext");
