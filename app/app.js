@@ -163,4 +163,5 @@ $(document).ready(()=>{
         //localStorage.setItem('jaVisitou', 'true'); // localStorage.removeItem('jaVisitou');
     }
 });
-localStorage.removeItem('jaVisitou');
+
+// localStorage.removeItem('jaVisitou');
