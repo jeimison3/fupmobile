@@ -49,6 +49,10 @@ a.text-primary:focus, a.text-primary:hover {
     background-color: #ff9067 !important;
 }
 
+.progress-bar{
+    background-color: #ff4500 !important;
+}
+
 
 .card-fullscreen{
     margin: -25px -25px 25px -25px !important;

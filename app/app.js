@@ -158,6 +158,7 @@ function appTutorial_sequence(seqNum){
 }
 
 $(document).ready(()=>{
+    $("#pageIsLoading").remove();
     if (!localStorage.getItem('jaVisitou')) {
         appTutorial_start();
         //localStorage.setItem('jaVisitou', 'true'); // localStorage.removeItem('jaVisitou');
