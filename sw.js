@@ -1,4 +1,4 @@
-var currVersion = '05_04_2020__07_06_00'
+var currVersion = '06_04_2020__07_22_00'
 
 // Responde a mensagem de atualização de SW
 self.addEventListener("message", function(event) {
@@ -42,7 +42,11 @@ self.addEventListener('install', function(event) {
           'app/icons/icon-152x152.png',
           'app/icons/icon-192x192.png',
           'app/icons/icon-384x384.png',
-          'app/icons/icon-512x512.png'
+          'app/icons/icon-512x512.png',
+
+          'app/codemirror-5.52.2/addon/lint/lint.css',
+          'app/codemirror-5.52.2/addon/lint/lint.js',
+          'js/mine-js-lint.js'
         ]);
       })
     );

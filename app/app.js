@@ -139,6 +139,7 @@ function appTutorial_sequence(seqNum){
     if (seqNum == seq.length) {
         appTutorial_stop();
         localStorage.setItem('jaVisitou', 'true');
+        fileContoller_firstRun();
         return;
     }
 
@@ -157,11 +158,128 @@ function appTutorial_sequence(seqNum){
 
 }
 
+// localStorage processes:
+var fileController_active = '';
+
+
+// Cria estrutura base
+function fileContoller_firstRun(){
+    fileContoller_setActivefile('default.js'); // Set
+    fileContoller_retriveActivefileData(); // Then retrive
+}
+
+
+// Quando não é primeiro acesso, existe um arquivo a ser carregado
+function fileContoller_retriveFull(){
+    fileController_active = localStorage.getItem( 'activeFile' );
+    fileContoller_retriveActivefileData();
+}
+
+
+// Define novo arquivo atual
+function fileContoller_setActivefile(nameFile){
+    fileController_active = nameFile;
+    localStorage.setItem("activeFile", nameFile);
+}
+
+
+// Carrega do localStorage dados do arquivo atual
+function fileContoller_retriveActivefileData(){
+    $('#nameprojectTextField').val( fileController_active );
+    var conteudo = localStorage.getItem( 'file_'+fileController_active );
+    if(conteudo){
+        editorCodigo.doc.setValue( JSON.parse(conteudo) );
+    } else editorCodigo.doc.setValue('');
+}
+
+// Lista todos os arquivos salvos
+function fileContoller_retriveListFiles(){
+    var conteudo = localStorage.getItem( 'list_files' );
+    if(conteudo){
+        return JSON.parse(conteudo);
+    }
+    return [];
+}
+
+function fileContoller_addToListFiles(){
+    var lastLista = fileContoller_retriveListFiles();
+    var idLista = lastLista.indexOf(fileController_active) == -1 ? lastLista.length : lastLista.indexOf(fileController_active);
+    lastLista[idLista] = fileController_active;
+    localStorage.setItem( 'list_files', JSON.stringify( lastLista ) );
+}
+
+// Deve ser chamado cada vez que o usuário parar de digitar
+function fileContoller_save(){
+    if(!fileController_active) return;
+    $('#nameprojectTextField').val( fileController_active );
+    localStorage.setItem( 'file_'+fileController_active, JSON.stringify( editorCodigo.doc.getValue() ) );
+    fileContoller_addToListFiles();
+    return true;
+}
+
+
+
 $(document).ready(()=>{
+
+    // Evento do botão de salvamento
+    $('#btnSaveProject').click(()=>{
+        fileContoller_setActivefile( $('#nameprojectTextField').val() );
+    });
+
+    $('#codigosListaModal').on('shown.bs.modal', function () {
+        $('#arquivosOpenLista').html('');
+        var arquivos = fileContoller_retriveListFiles();
+        for (var arq in arquivos){
+            $('#arquivosOpenLista').append(
+
+                $('<tr></tr>').append(
+                    $('<th></th>').html(arquivos[arq])
+                ).append(
+                    $('<td></td>').append(
+                        $("<p>Abrir</p>").click((obj)=>{
+                            fileContoller_setActivefile( $(obj.target).data('name') ); // Set
+                            fileContoller_retriveActivefileData(); // Then retrive
+                            $('#codigosListaModal').modal('hide');
+                        }).data('name', arquivos[arq])
+                    )
+                ).append(
+                    $('<td></td>').append(
+                        $("<p>Apagar</p>").click(()=>{
+                            var listaOrigin = fileContoller_retriveListFiles();
+                            var listaD = [];
+                            listaOrigin.forEach(element => {
+                                if(element != arquivos[arq])
+                                    listaD[listaD.length] = element
+                            });
+                            var oldFile = arquivos[arq];
+                            
+                            localStorage.removeItem('file_'+arquivos[arq]);
+                            localStorage.setItem( 'list_files', JSON.stringify( listaD ) );
+                            $( "#codigosListaModal" ).trigger( "shown.bs.modal" ); // Recarrega lista
+
+                            if(fileController_active == oldFile){
+                                if (listaD.length > 0) {
+                                    fileContoller_setActivefile(listaD[0]); // Set
+                                    fileContoller_retriveActivefileData(); // Then retrive
+                                }
+                                else fileContoller_firstRun();
+                                
+                            }
+                        })
+                    )
+                )
+            );
+        }
+    })
+
+    // Página pronta = fim do carregamento
     $("#pageIsLoading").remove();
+
+    // Decide próxima ação com base na variável
     if (!localStorage.getItem('jaVisitou')) {
         appTutorial_start();
-    }
+    } else fileContoller_retriveFull();
+
 });
 
 // localStorage.removeItem('jaVisitou');

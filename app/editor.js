@@ -13,31 +13,12 @@ function runCode(code) {
     document.getElementsByTagName("head")[0].appendChild(scriptElm);
 }
 
+var isCodeOkay = true;
 function btnRun(){
-    var sucesso = precompile();
-    if(sucesso) runCode( editorCodigo.doc.getValue() );
+    if(isCodeOkay) runCode( editorCodigo.doc.getValue() );
     else setTimeout( ()=>{ $('#messagesDropdown').dropdown('show') }, 300);
 }
 
-function precompile(){
-    var source = editorCodigo.doc.getValue().split('\n');
-    var options = {
-        
-    };
-    var predef = {
-        console: { log: (a)=>{} }
-    };
-
-    JSHINT(source, options, predef);
-    var retorno = JSHINT.data();
-    precompileErrorHandling(retorno.errors);
-
-    if(retorno.errors == undefined) return true;
-    
-    return false;
-
-    //console.log(JSHINT.data());
-}
 
 String.prototype.replaceArray = function(find, replace) {
     var replaceString = this;
@@ -68,14 +49,15 @@ function precompileErrorHandling(arrErrors){
                 erro.reason = 'Faltando ponto e vírgula ou não encontrado.';
                 break;
             default:
-                var find = [/to/g, /or/g, /Unexpected/g, /Expected/g, /and instead saw/g, /Unmatched/, /identifier/g ,/expression/g, /an/g, /match/g, /from line/g, /assignment/g, /function call/g]; 
-                var replace = ['para', 'ou', "Inesperado", 'Esperado', 'ao invés de', 'Sem par', 'identificador', 'expressão', 'um(a)', 'combinar', 'da linha', 'atribuição', 'chamada de função'];
+                var find = ['an identifier', 'an operator', 'an expression', 'to', 'or function call', 'Unexpected', 'Expected', 'and instead saw', 'Unmatched', 'an assignment', 'match', 'from line', 'is not', 'defined']; 
+                var replace = ['um identificador', 'um operador', 'uma expressão', 'para', 'ou chamada de função', "Inesperado", 'Esperado', 'ao invés de', 'Sem par', 'uma atribuição', 'combinar', 'da linha', 'não é', 'definido', ];
                 erro.reason = erro.reason.replaceArray(find, replace);
                 break;
         }
         if (erro != undefined){
             errorCounter++;
-            precompileNewErrorHandle(erro);
+            if( erro.code.startsWith('W') ) precompileNewWarningHandle(erro);
+            else precompileNewErrorHandle(erro);
         }
     });
     document.getElementById("errorsCounter").innerText = errorCounter;
@@ -85,6 +67,11 @@ function precompileErrorHandling(arrErrors){
 function precompileNewErrorHandle(erro){
     //console.log("Linha "+ erro.line + ". " + erro.reason + " (No trecho: " + erro.evidence + ")" );
     warnsAndErrosWindow_Add( 'error', erro.line, erro.reason );
+}
+
+function precompileNewWarningHandle(erro){
+    //console.log("Linha "+ erro.line + ". " + erro.reason + " (No trecho: " + erro.evidence + ")" );
+    warnsAndErrosWindow_Add( 'warn', erro.line, erro.reason );
 }
 
 function warnsAndErrosWindow_Add(tipo, linha, conteudo){
@@ -149,7 +136,7 @@ function animacaoGoTo(divId){
 var intervalCodechanged = undefined;
 function EditorCodigo_onChange(instancia, obj){
     if(intervalCodechanged != undefined) intervalCodechanged = clearTimeout(intervalCodechanged);
-    intervalCodechanged = setTimeout(()=>{precompile(); intervalCodechanged=undefined;}, 2000);
+    intervalCodechanged = setTimeout(()=>{fileContoller_save(); intervalCodechanged=undefined;}, 2000);
 }
 
 /* Debugar todos os console.log, warn, error e debug */
@@ -157,7 +144,6 @@ function EditorCodigo_onChange(instancia, obj){
     if (console.everything === undefined)
 {
     console.everything = [];
-
     console.defaultLog = console.log.bind(console);
     console.log = function(){
         console.everything.push({"type":"log", "datetime":Date().toLocaleString(), "value":Array.from(arguments)});

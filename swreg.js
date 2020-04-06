@@ -1,6 +1,20 @@
 let newWorker;
 
-if ('serviceWorker' in navigator) {
+let __DISABLE_SW = false;
+
+if ('serviceWorker' in navigator && !__DISABLE_SW) {
+
+    let refreshing;
+    // Esse evento será chamado quando o Service Worker for atualizado
+    // Aqui estamos recarregando a página
+    navigator.serviceWorker.addEventListener("controllerchange", function() {
+    if (refreshing) {
+        return;
+    }
+    window.location.reload();
+    refreshing = true;
+    });
+
     navigator.serviceWorker.register('sw.js')
     .then(function(reg) {
         reg.addEventListener('updatefound', ()=>{

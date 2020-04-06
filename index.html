@@ -187,9 +187,9 @@
           <!-- Topbar campo de texto -->
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Nome do projeto" aria-label="Search" aria-describedby="basic-addon2">
+              <input data-updated='false' id="nameprojectTextField" type="text" class="form-control bg-light border-0 small" placeholder="Nome do projeto" aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button id="btnSaveProject" class="btn btn-primary" type="button">
                   <i class="fas fa-save fa-sm"></i>
                 </button>
               </div>
@@ -539,7 +539,7 @@
 
   <!-- Codigos Modal-->
   <div class="modal fade" id="codigosListaModal" tabindex="-1" role="dialog" aria-labelledby="codigosModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="codigosModalLabel">Lista de arquivos</h5>
@@ -547,7 +547,29 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Funcionalidade em desenvolvimento.</div>
+        <div style="padding: 20px;" class="modal-body">
+
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Arquivo</th>
+                <th scope="col">#</th>
+                <th scope="col">#</th>
+              </tr>
+            </thead>
+            <tbody id="arquivosOpenLista">
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+        </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Fechar</button>
         </div>
@@ -630,6 +652,10 @@
   <script src="app/editor.js"></script>
   <script src="app/app.js"></script>
 
+  <link rel="stylesheet" href="app/codemirror-5.52.2/addon/lint/lint.css">
+  <script src="app/codemirror-5.52.2/addon/lint/lint.js"></script>
+  <script src="js/mine-js-lint.js"></script>
+
   <script>
     var txArea = document.getElementById("demotext");
     var editorCodigo = CodeMirror.fromTextArea(txArea, {
@@ -638,8 +664,10 @@
       extraKeys: {
         "Ctrl-Space": "autocomplete",
         "F9": btnRun,
-        "Ctrl-S":saveCode,
+        "Ctrl-S":saveCode
       },
+      gutters: ["CodeMirror-lint-markers"],
+      lint: true,
       autoCloseBrackets: true,
       matchBrackets: true,
       showCursorWhenSelecting: true,
