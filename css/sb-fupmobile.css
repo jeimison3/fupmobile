@@ -26,6 +26,12 @@ a.text-primary:focus, a.text-primary:hover {
     background-color: #ff4400!important;
 }
 
+.btn-primary {
+    color: #fff!important;
+    background-color: #ff4400!important;
+    border-color: #ff4400!important;
+}
+
 .btn-link:hover {
     color: #ff4400 !important;
 }
@@ -135,3 +141,9 @@ a.text-primary:focus, a.text-primary:hover {
             opacity: 0;
         }
     }
+
+
+/* Elementos App */
+#mobileKeyboard {
+    display: none;
+}

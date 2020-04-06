@@ -14,7 +14,6 @@ $(".firstRun, .container-pulser").on("click", (evt)=>{
 var isMobile = undefined;
 
 function appTutorial_start(){
-    isMobile = $('#sidebarToggleTop').is(':visible');
 
     // Barra de rolagem pro topo
     $('html, body').animate({
@@ -100,30 +99,35 @@ function appTutorial_stop(){
 
 function appTutorial_sequence(seqNum){
     let seq = [
-        {
+        { // 0
             txt: 'Olá! Esse tutorial vai te mostrar as principais funções do app. Clique na região marcada para continuar!',
             seletor:'#btnFirstRun',
             okVisivel:true,
             addClasse: false
         },
-        isMobile ? {
+        isMobile ? { // 1
             txt: 'Esse é o botão Menu. Há opções para abrir seus códigos ou ver exemplos!',
             seletor:'#sidebarToggleTop',
             okVisivel:false,
             addClasse: true
-        } : null
-        ,{
+        } : null, { // 2
             txt: 'Aqui fica a lista de entradas. Você pode programar entradas no seu código.',
             seletor: '#inputsDropdown',
             okVisivel:false,
             addClasse: true
-        },{
+        },{ // 3
             txt: 'Esse botão abre as notificações. Erros no seu código serão alertados aqui quase em tempo real.',
             seletor: '#messagesDropdown',
             okVisivel:false,
             addClasse: true
-        },{
-            txt: 'Por fim, chamamos de app pois agora ele está disponível offline. Que tal tentar?<br/>Pra uma boa experiência, adicione em seu navegador por:<br/>'+
+        },
+        isMobile ? {// 4
+            txt: 'Essa barra permite controlar o ponteiro do teclado. Fica mais fácil usando ;)',
+            seletor:'#btnFirstRun',
+            okVisivel:true,
+            addClasse: false
+        } : null, { // 5
+            txt: 'Por fim, chamamos de app pois agora você pode entrar offline! Que tal tentar?<br/><br/>DICA: Pra uma boa experiência, adicione em seu navegador por:<br/>'+
             (isMobile ? 
                 '<div style="-webkit-transform: rotate(90deg);-moz-transform: rotate(90deg);-o-transform: rotate(90deg);-ms-transform: rotate(90deg);transform: rotate(90deg); position: fixed;">&#8230;</div> &emsp; > Adicionar à tela inicial'
                 : 'Configurações > Instalar aplicativo'),
@@ -134,6 +138,11 @@ function appTutorial_sequence(seqNum){
     ];
 
     if (seqNum == undefined) seqNum = 0;
+    
+    // Exibe a barra de setas no passo 4 de mobile
+    if (seqNum == 4 && isMobile) {
+        $('#mobileKeyboard').css('display','flex');
+    }
 
     // Final:
     if (seqNum == seq.length) {
@@ -157,6 +166,25 @@ function appTutorial_sequence(seqNum){
     appTutorial_pulsar( seq[Number(seqNum)].seletor, seqNum+1, seq[Number(seqNum)].addClasse );
 
 }
+
+// ############ Interface buttons ######################
+
+function cursorMove(dir){
+    var lastCursor = editorCodigo.getCursor();
+    var sentido = 0;
+    switch(dir){
+        case 'up': lastCursor.line -= 1; break;
+        case 'down': lastCursor.line += 1; break;
+        case 'left': lastCursor.ch -= 1; sentido=-1; break;
+        case 'right': lastCursor.ch += 1; sentido=1; break;
+        default: 
+    }
+    editorCodigo.focus();
+    editorCodigo.setCursor({line: lastCursor.line, ch: lastCursor.ch, options: {bias: sentido} });
+    //console.log(lastCursor);
+}
+
+// ############ Script storage #########################
 
 // localStorage processes:
 var fileController_active = '';
@@ -221,6 +249,8 @@ function fileContoller_save(){
 
 $(document).ready(()=>{
 
+    isMobile = $('#sidebarToggleTop').is(':visible');
+
     // Evento do botão de salvamento
     $('#btnSaveProject').click(()=>{
         fileContoller_setActivefile( $('#nameprojectTextField').val() );
@@ -278,7 +308,10 @@ $(document).ready(()=>{
     // Decide próxima ação com base na variável
     if (!localStorage.getItem('jaVisitou')) {
         appTutorial_start();
-    } else fileContoller_retriveFull();
+    } else {
+        if(isMobile) $('#mobileKeyboard').css('display','flex');
+        fileContoller_retriveFull();
+    }
 
 });
 

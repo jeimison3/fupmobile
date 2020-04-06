@@ -635,7 +635,21 @@
   </div>
 
 
-  
+  <nav id="mobileKeyboard" class="navbar fixed-bottom navbar-light bg-light">
+    <a onclick="cursorMove('left'); return false;" href="#" class="btn btn-primary btn-circle">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+    <a onclick="cursorMove('down'); return false;" href="#" class="btn btn-primary btn-circle">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+    <a onclick="cursorMove('up'); return false;" href="#" class="btn btn-primary btn-circle">
+      <i class="fas fa-chevron-up"></i>
+    </a>
+    <a onclick="cursorMove('right'); return false;" href="#" class="btn btn-primary btn-circle">
+      <i class="fas fa-arrow-right"></i>
+    </a>
+    
+  </nav>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -672,7 +686,7 @@
       lint: true,
       autoCloseBrackets: true,
       matchBrackets: true,
-      showCursorWhenSelecting: true,
+      //showCursorWhenSelecting: true,
       theme: "dracula",
       tabSize: 2
     });

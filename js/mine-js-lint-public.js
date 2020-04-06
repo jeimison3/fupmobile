@@ -72,7 +72,7 @@ function lintSimpleValidator(text, opts) {
               from: CodeMirror.Pos(error.line - 1, start),
               to: CodeMirror.Pos(error.line - 1, end)
           };
-  
+          //if (!isMobile)
           output.push(hint);
       }
     }
