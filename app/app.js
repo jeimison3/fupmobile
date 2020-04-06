@@ -251,6 +251,11 @@ $(document).ready(()=>{
 
     isMobile = $('#sidebarToggleTop').is(':visible');
 
+    // Eventual click na navbar não fecha o teclado
+    $('#mobileKeyboard').click(()=>{
+        editorCodigo.focus();
+    });
+
     // Evento do botão de salvamento
     $('#btnSaveProject').click(()=>{
         fileContoller_setActivefile( $('#nameprojectTextField').val() );
