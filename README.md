@@ -5,6 +5,7 @@ Um PWA(Progressive Web App) que requer apenas um servidor HTTP para distribuir u
 - Verificação de erros e warnings enquanto desenvolve.
 - Ferramenta para criar entradas predefinidas e funções para recebê-las.
 - Tutorial inicial no primeiro uso da aplicação.
+- Interface mobile que simplifica o desenvolvimento.
 - Usa somente o navegador do usuário, sem depender de serviço em back-end.
 - Instalar na memória do navegador, tornando possível usar offline.
 
@@ -19,7 +20,7 @@ Um PWA(Progressive Web App) que requer apenas um servidor HTTP para distribuir u
 
 ## Bibliotecas
 - [JSHint](https://jshint.com) - Checa erros e avisos do código.
-
+- [CodeMirror](https://codemirror.net/) - Editor de código personalizável.
 
 ## Template Bootstrap
 - [Start Bootstrap - SB Admin 2](https://startbootstrap.com/template-overviews/sb-admin-2/)
