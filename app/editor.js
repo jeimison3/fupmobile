@@ -136,7 +136,7 @@ function animacaoGoTo(divId){
 var intervalCodechanged = undefined;
 function EditorCodigo_onChange(instancia, obj){
     if(intervalCodechanged != undefined) intervalCodechanged = clearTimeout(intervalCodechanged);
-    intervalCodechanged = setTimeout(()=>{fileContoller_save(); intervalCodechanged=undefined;}, 2000);
+    intervalCodechanged = setTimeout(()=>{/*lintSimpleValidator(editorCodigo.doc.getValue()); */fileContoller_save(); intervalCodechanged=undefined;}, 2000);
 }
 
 /* Debugar todos os console.log, warn, error e debug */
