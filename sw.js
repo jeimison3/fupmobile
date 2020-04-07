@@ -1,4 +1,4 @@
-var currVersion = '06_04_2020__22_02_00'
+var currVersion = '06_04_2020__22_35_00'
 
 // Responde a mensagem de atualização de SW
 self.addEventListener("message", function(event) {
