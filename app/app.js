@@ -287,15 +287,13 @@ function fileContoller_save(){
 
 $(document).ready(()=>{
 
-    isMobile = $('#sidebarToggleTop').is(':visible');
-    let rightData = isMobile?"mobile":"desktop";
+    //isMobile = $('#sidebarToggleTop').is(':visible');
+    isMobile = !($(':input.nameprojectTextField[data-to=desktop]').is(':visible'));
     
-    $("input.nameprojectTextField").each((id,obj)=>{
-        if ($(obj).data('to') == rightData) $(obj).attr('id', 'nameprojectTextField');
-    });
-    $("button.btnSaveProject").each((id,obj)=>{
-        if ($(obj).data('to') == rightData) $(obj).attr('id', 'btnSaveProject');
-    });
+    let rightData = isMobile?"mobile":"desktop";
+
+    $(':input.nameprojectTextField[data-to='+rightData+']').attr('id', 'nameprojectTextField');
+    $(':button.btnSaveProject[data-to='+rightData+']').attr('id', 'btnSaveProject');
     
     // Eventual click na navbar não fecha o teclado
     $('#mobileKeyboard').click(()=>{

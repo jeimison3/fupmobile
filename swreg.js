@@ -26,7 +26,7 @@ if ('serviceWorker' in navigator && !__DISABLE_SW) {
                 }
             })
         })
-      console.log('Registrado com sucesso. Scope é ' + reg.scope);
+      console.log('Atualizado com sucesso. Scope: ' + reg.scope);
     }).catch(function(error) {
       console.error('Falha a registrar pois: ' + error);
     });
