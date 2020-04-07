@@ -169,19 +169,57 @@ function appTutorial_sequence(seqNum){
 
 // ############ Interface buttons ######################
 
-function cursorMove(dir){
+function MenuCursor_move(dir){
     var lastCursor = editorCodigo.getCursor();
-    var sentido = 0;
+    var sentidoX = 0;
+    var sentidoY = 0;
     switch(dir){
-        case 'up': lastCursor.line -= 1; break;
-        case 'down': lastCursor.line += 1; break;
-        case 'left': lastCursor.ch -= 1; sentido=-1; break;
-        case 'right': lastCursor.ch += 1; sentido=1; break;
+        case 'up': sentidoY=-1; break;
+        case 'down': sentidoY=1; break;
+        case 'left': sentidoX=-1; break;
+        case 'right': sentidoX=1; break;
         default: 
     }
+    // Se moveu para além do tamanho da linha
+    if( sentidoX+lastCursor.ch > editorCodigo.getLine(lastCursor.line).length )
+        // E existe alguma linha após
+        if( lastCursor.line+1 < editorCodigo.doc.lineCount() )
+        {
+            sentidoY+=1; // Próxima linha
+            sentidoX=-lastCursor.ch; // Volta cursor pro começo
+        }
+            
+    
+    // Se moveu para esquerda da linha
+    if( sentidoX+lastCursor.ch < 0 )
+        // E existe alguma linha antes
+        if( lastCursor.line > 0 )
+        {
+            sentidoY-=1; // Linha anterior
+            sentidoX=editorCodigo.getLine(lastCursor.line-1).length; // Cursor para fim da linha
+        }
+
     editorCodigo.focus();
-    editorCodigo.setCursor({line: lastCursor.line, ch: lastCursor.ch, options: {bias: sentido} });
+    editorCodigo.setCursor({line: lastCursor.line+sentidoY, ch: lastCursor.ch+sentidoX, options: {bias: sentidoX} });
     //console.log(lastCursor);
+}
+
+var MenuCursor_keyTimer = undefined;
+function MenuCursor_startkeydown(dir){
+    MenuCursor_move(dir); // 1º press
+
+    MenuCursor_keyTimer = setTimeout((d1)=>{
+        MenuCursor_move(d1); // após 500ms 2º press seguido de 
+
+        MenuCursor_keyTimer = setTimeout((d2)=>{
+            MenuCursor_move(d2); // 1 press a cada 200ms
+        }, 200, d1);
+
+    }, 500, dir);
+}
+
+function MenuCursor_stopkeydown(){
+    MenuCursor_keyTimer = clearTimeout(MenuCursor_keyTimer);
 }
 
 // ############ Script storage #########################
@@ -306,6 +344,20 @@ $(document).ready(()=>{
             );
         }
     })
+
+    $("nav#mobileKeyboard>button").on('touchstart',(evt)=>{
+        editorCodigo.focus();
+        evt.cancelBubble = true;
+        evt.returnValue = false;
+        MenuCursor_startkeydown( $(evt.delegateTarget).data('dir') );
+    }).on('touchend',()=>{
+        MenuCursor_stopkeydown();
+    }).on('oncontextmenu',(evt)=>{
+        evt.preventDefault();
+        evt.stopPropagation();
+        return false;
+    });
+
 
     // Página pronta = fim do carregamento
     $("#pageIsLoading").remove();
