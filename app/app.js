@@ -180,6 +180,14 @@ function MenuCursor_move(dir){
         case 'right': sentidoX=1; break;
         default: 
     }
+    if(dir == 'up' || dir == 'down'){
+        //$("#mobileKeyboard")[0].click()
+        //$("nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow").focus();
+        //editorCodigo.focus();
+        $("#mobileKeyboard").trigger('click');
+    }
+    
+
     // Se moveu para além do tamanho da linha
     if( sentidoX+lastCursor.ch > editorCodigo.getLine(lastCursor.line).length )
         // E existe alguma linha após
@@ -209,13 +217,19 @@ function MenuCursor_startkeydown(dir){
     MenuCursor_move(dir); // 1º press
 
     MenuCursor_keyTimer = setTimeout((d1)=>{
-        MenuCursor_move(d1); // após 500ms 2º press seguido de 
-
+        //MenuCursor_move(d1); // após 500ms 2º press seguido de 
+        
+        if (d1 == 'left')
+            editorCodigo.execCommand('goWordLeft');
+        else if (d1 == 'right')
+            editorCodigo.execCommand('goWordRight');
+        /*
         MenuCursor_keyTimer = setTimeout((d2)=>{
             MenuCursor_move(d2); // 1 press a cada 200ms
         }, 200, d1);
+        */
 
-    }, 500, dir);
+    }, 350, dir);
 }
 
 function MenuCursor_stopkeydown(){

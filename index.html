@@ -677,7 +677,8 @@
       extraKeys: {
         "Ctrl-Space": "autocomplete",
         "F9": btnRun,
-        "Ctrl-S":saveCode
+        "Ctrl-S":saveCode,
+        //"Bkspc":saveCode
       },
       gutters: ["CodeMirror-lint-markers"],
       lint: true,
@@ -685,10 +686,14 @@
       matchBrackets: true,
       showCursorWhenSelecting: true,
       theme: "dracula",
-      tabSize: 2
+      tabSize: 2,
+      inputStyle:'textarea'
     });
-
+    
     editorCodigo.on( 'change', EditorCodigo_onChange );
+    //editorCodigo.on( 'keyHandled', EditorCodigo_onInput );
+    //editorCodigo.on( 'inputRead', EditorCodigo_onInput );
+    
     
     txArea = document.getElementById("outputText");
     var editorSaida = CodeMirror.fromTextArea(txArea, {

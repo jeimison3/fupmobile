@@ -139,6 +139,15 @@ function EditorCodigo_onChange(instancia, obj){
     intervalCodechanged = setTimeout(()=>{/*lintSimpleValidator(editorCodigo.doc.getValue()); */fileContoller_save(); intervalCodechanged=undefined;}, 2000);
 }
 
+function EditorCodigo_onKey(code, nome, evt){
+    console.log(nome);
+}
+
+function EditorCodigo_onInput(code, obj){
+    console.log(obj);
+}
+
+
 /* Debugar todos os console.log, warn, error e debug */
 (function(){
     if (console.everything === undefined)

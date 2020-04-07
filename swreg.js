@@ -1,6 +1,6 @@
 let newWorker;
 
-let __DISABLE_SW = false;
+let __DISABLE_SW = true;
 
 if ('serviceWorker' in navigator && !__DISABLE_SW) {
 
