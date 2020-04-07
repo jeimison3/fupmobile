@@ -14,7 +14,10 @@ function lintSimpleValidator(text, opts) {
       options.indent = 1; // JSHint default value is 4
     JSHINT(text, options, options.globals);
     var errors = JSHINT.data().errors, result = [];
+    
     warnsAndErrosWindow_Clear();
+    isCodeOkay = true;
+    
     if (errors) parseErrors(errors, result);
     return result;
   }
