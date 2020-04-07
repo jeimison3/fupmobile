@@ -317,28 +317,29 @@ $(document).ready(()=>{
                     $('<th></th>').html(arquivos[arq])
                 ).append(
                     $('<td></td>').append(
-                        $("<p>Abrir</p>").click((obj)=>{
-                            fileContoller_setActivefile( $(obj.target).data('name') ); // Set
+                        $("<p>Abrir</p>").click((evt)=>{
+                            fileContoller_setActivefile( $(evt.delegateTarget).data('name') ); // Set
                             fileContoller_retriveActivefileData(); // Then retrive
                             $('#codigosListaModal').modal('hide');
                         }).data('name', arquivos[arq])
                     )
                 ).append(
                     $('<td></td>').append(
-                        $("<p>Apagar</p>").click(()=>{
+                        $("<p>Apagar</p>").click((evt)=>{
                             var listaOrigin = fileContoller_retriveListFiles();
                             var listaD = [];
+                            var fileName = $(evt.delegateTarget).data('name');
                             listaOrigin.forEach(element => {
-                                if(element != arquivos[arq])
+                                if(element != fileName)
                                     listaD[listaD.length] = element
                             });
-                            var oldFile = arquivos[arq];
                             
-                            localStorage.removeItem('file_'+arquivos[arq]);
+                            
+                            localStorage.removeItem('file_'+fileName);
                             localStorage.setItem( 'list_files', JSON.stringify( listaD ) );
                             $( "#codigosListaModal" ).trigger( "shown.bs.modal" ); // Recarrega lista
 
-                            if(fileController_active == oldFile){
+                            if(fileController_active == fileName){
                                 if (listaD.length > 0) {
                                     fileContoller_setActivefile(listaD[0]); // Set
                                     fileContoller_retriveActivefileData(); // Then retrive
@@ -346,7 +347,7 @@ $(document).ready(()=>{
                                 else fileContoller_firstRun();
                                 
                             }
-                        })
+                        }).data('name', arquivos[arq])
                     )
                 )
             );
